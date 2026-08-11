@@ -5,7 +5,7 @@ export const useToast = () => {
   const message = ref('');
   const type = ref<'success' | 'error'>('error');
 
-  function showToast(newMessage: string, toastType: 'success' | 'error') {
+  function showToast(newMessage: string, toastType: 'success' | 'error', duration: number = 1.5) {
     message.value = newMessage;
     visible.value = true;
     type.value = toastType;
@@ -13,7 +13,7 @@ export const useToast = () => {
     setTimeout(() => {
       message.value = '';
       visible.value = false;
-    }, 1500);
+    }, duration * 1000);
   }
 
   return {
