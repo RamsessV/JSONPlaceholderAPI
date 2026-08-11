@@ -5,17 +5,14 @@
       :value="modelValue"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value ?? '')"
       @blur="$emit('blur')"
-      :class="{ error: error }"
     />
 
-    <span class="error-message" v-if="error">{{ error }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
 interface Props {
   modelValue?: string | number;
-  error?: string;
   type: 'text' | 'number';
 }
 
@@ -45,13 +42,5 @@ input {
 
 input:focus {
   outline: none;
-}
-
-.error {
-  border-color: #ef4444;
-}
-
-.error-message {
-  color: #f87171;
 }
 </style>
