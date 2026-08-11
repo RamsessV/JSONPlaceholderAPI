@@ -1,0 +1,1 @@
+export const loginAction = (username: string, password: string) => username === 'admin' && password === '123456';
