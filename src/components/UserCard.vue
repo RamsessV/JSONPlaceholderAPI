@@ -9,10 +9,19 @@
       <p>{{ email }}</p>
       <span>{{ company }}</span>
     </div>
+
+    <div class="user-card_actions">
+      <MainButton type="button" title="Editar" @on-click="$router.push({name: 'edit-user-form', params: {id}})" />
+      <MainButton class="delete" type="button" title="Eiminar"/>
+    </div>
   </article>
 </template>
+
+
+
 <script setup lang="ts">
 import type { User } from '@/types';
+import MainButton from './MainButton.vue';
 
 
 defineProps<User>();
@@ -66,5 +75,12 @@ defineProps<User>();
   font-size: 0.8rem;
   font-weight: 600;
 }
+
+.user-card_actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
 
 </style>

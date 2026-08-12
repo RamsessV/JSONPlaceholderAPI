@@ -27,9 +27,14 @@ button {
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #4338ca;
+  transform: scale(1.05);
+}
+
+.delete {
+  background-color: red;
 }
 </style>

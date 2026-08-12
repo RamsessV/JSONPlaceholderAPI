@@ -2,7 +2,7 @@
   <template v-if="loading"><LoadingSpinner /></template>
 
   <template v-if="error">
-    <MainButton title="Intentar de nuevo" type="button" @on-click="retry" />
+    <MainButton title="Intentar de nuevo" type="button" @on-click="fetchUsers" />
   </template>
 
   <template v-else>
@@ -45,7 +45,7 @@ import ToastComponent from '@/components/ToastComponent.vue';
 import UserList from '@/components/UserList.vue';
 import { useToast } from '@/composables/useToast';
 import { useUsers } from '@/composables/useUsers';
-import { watch } from 'vue';
+import { onMounted, watch } from 'vue';
 
 const {
   users,
@@ -57,8 +57,10 @@ const {
   nextPage,
   previousPage,
   lastPage,
-  retry,
+  fetchUsers,
 } = useUsers();
+
+onMounted(fetchUsers);
 
 const { message, visible, type, showToast } = useToast();
 

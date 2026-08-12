@@ -26,10 +26,6 @@ const loaded = ref(false);
 const error = ref(false);
 
 export const useUsers = () => {
-  if (!loaded.value) {
-    fetchUsers();
-  }
-
   function nextPage() {
     page.value++;
   }
@@ -37,7 +33,7 @@ export const useUsers = () => {
     page.value--;
   }
 
-  watch([searchName, searchCompany], () => page.value = 1);
+  watch([searchName, searchCompany], () => (page.value = 1));
 
   return {
     users,
@@ -49,11 +45,16 @@ export const useUsers = () => {
     searchCompany,
     nextPage,
     previousPage,
-    retry: fetchUsers,
+    fetchUsers,
+    getUserById,
+    addUser,
+    updateUser,
   };
 };
 
 async function fetchUsers() {
+  if (loaded.value) return;
+
   error.value = false;
   loading.value = true;
 
@@ -72,4 +73,31 @@ async function fetchUsers() {
   _users.value = response.users;
   loaded.value = true;
   loading.value = false;
+}
+
+function getUserById(id: number) {
+  return users.value.find((user) => user.id === id);
+}
+
+function updateUser(user: User) {
+  if (_users.value.some((u) => u.id !== user.id && u.email === user.email)) {
+    return { ok: false, message: 'Este correo ya esta registrado' };
+  }
+  const index = _users.value.findIndex((u) => u.id === user.id);
+  _users.value[index] = user;
+  return { ok: true, message: 'Usuario actualizado con éxito' };
+}
+
+function addUser(name: string, email: string, company: string) {
+  if (_users.value.some((u) => u.email === email)) {
+    return { ok: false, message: 'Este correo ya esta registrado' };
+  }
+  const newUser = {
+    id: _users.value.length > 0 ? Math.max(..._users.value.map((u) => u.id)) + 1 : 1,
+    name,
+    email,
+    company,
+  };
+  _users.value.push(newUser);
+  return { ok: true, message: 'Usuario registrado con éxito' };
 }

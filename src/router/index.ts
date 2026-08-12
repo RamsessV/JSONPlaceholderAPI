@@ -35,8 +35,19 @@ const router = createRouter({
         {
           path: '',
           name: 'users',
-          component: () => import('@/views/AdminView.vue')
-        }
+          component: () => import('@/views/AdminView.vue'),
+        },
+        {
+          path: 'user-form',
+          name: 'add-user-form',
+          component: () => import('@/views/UserFormView.vue'),
+        },
+        {
+          path: 'user-form/:id',
+          name: 'edit-user-form',
+          props: route => ({id: Number(route.params.id)}),
+          component: () => import('@/views/UserFormView.vue'),
+        },
       ]
     },
   ],
