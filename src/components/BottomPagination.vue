@@ -2,7 +2,7 @@
   <div class="pagination">
     <button
       :disabled="page === 1"
-      @click="$router.push({ query: { page: page - 1 } })"
+      @click="$emit('previousPage')"
       class="pagination__button"
     >
       <ArrowLeft />
@@ -11,7 +11,7 @@
 
     <button
       :disabled="lastPage"
-      @click="$router.push({ query: { page: page + 1 } })"
+      @click="$emit('nextPage')"
       class="pagination__button"
     >
       <span>Siguientes</span>
@@ -20,12 +20,9 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import ArrowLeft from '@/assets/ArrowLeft.vue';
 import ArrowRight from '@/assets/ArrowRight.vue';
-
-
 
 interface Props {
   page: number;
@@ -33,8 +30,13 @@ interface Props {
 }
 
 defineProps<Props>();
-</script>
 
+defineEmits<{
+  nextPage: [];
+  previousPage: [];
+}>();
+
+</script>
 
 <style scoped>
 .pagination {
@@ -67,4 +69,3 @@ defineProps<Props>();
   cursor: not-allowed;
 }
 </style>
-
