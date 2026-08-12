@@ -1,6 +1,6 @@
 import { getUsersAction } from '@/actions';
 import type { User } from '@/types';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const page = ref(1);
 const _users = ref<User[]>([]);
@@ -37,11 +37,13 @@ export const useUsers = () => {
     page.value--;
   }
 
+  watch([searchName, searchCompany], () => page.value = 1);
+
   return {
     users,
     error,
     page,
-    lastPage: computed(() => users.value.length < 3),
+    lastPage: computed(() => users.value.length < 4),
     loading,
     searchName,
     searchCompany,
