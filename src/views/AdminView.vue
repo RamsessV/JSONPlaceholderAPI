@@ -9,7 +9,10 @@
     <h3>Página {{ page }}</h3>
 
     <form class="search-form">
-      <h2>Buscar usuarios</h2>
+      <div class="header-form">
+        <h2>Buscar usuarios</h2>
+        <MainButton type="button" title="Agregar usuario" @on-click="$router.push({name: 'add-user-form'})" />
+      </div>
 
       <div class="search-form__fields">
         <div class="search-form__field">
@@ -76,6 +79,11 @@ watch(error, (hasError) => {
   max-width: 100%;
   margin: 0 auto;
   padding-bottom: 20px;
+}
+
+.header-form {
+  display: flex;
+  justify-content: space-between;
 }
 
 .search-form h2 {

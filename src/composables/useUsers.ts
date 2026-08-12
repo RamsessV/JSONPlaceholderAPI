@@ -33,7 +33,7 @@ export const useUsers = () => {
     page.value--;
   }
 
-  watch([searchName, searchCompany], () => (page.value = 1));
+  watch([searchName, searchCompany], () => page.value = 1);
 
   return {
     users,

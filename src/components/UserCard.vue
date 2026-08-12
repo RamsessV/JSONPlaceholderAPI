@@ -1,7 +1,7 @@
 <template>
   <article class="user-card">
     <div class="user-card__avatar">
-      {{ name.charAt(0).toUpperCase() }}
+      {{ id.toString() }}
     </div>
 
     <div class="user-card__info">

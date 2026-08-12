@@ -3,7 +3,7 @@
 
   <template v-else>
     <form @submit.prevent="handleSubmit" class="user-form">
-      <h2>Usuario</h2>
+      <h2>{{ id ? 'Actualiza la información del usuario' : 'Agrega un nuevo usuario' }}</h2>
       <p class="user-form__subtitle">Completa la información del usuario</p>
 
       <div class="user-form__fields">
