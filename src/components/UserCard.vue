@@ -12,7 +12,7 @@
 
     <div class="user-card_actions">
       <MainButton type="button" title="Editar" @on-click="$router.push({name: 'edit-user-form', params: {id}})" />
-      <MainButton class="delete" type="button" title="Eiminar"/>
+      <MainButton class="red" type="button" title="Eiminar" @on-click="$emit('onDelete')"/>
     </div>
   </article>
 </template>
@@ -25,6 +25,10 @@ import MainButton from './MainButton.vue';
 
 
 defineProps<User>();
+
+defineEmits<{
+  onDelete: []
+}>();
 
 </script>
 

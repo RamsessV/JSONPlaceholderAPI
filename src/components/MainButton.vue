@@ -34,7 +34,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-.delete {
+.red {
   background-color: red;
 }
 </style>

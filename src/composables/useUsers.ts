@@ -33,7 +33,7 @@ export const useUsers = () => {
     page.value--;
   }
 
-  watch([searchName, searchCompany], () => page.value = 1);
+  watch([searchName, searchCompany], () => (page.value = 1));
 
   return {
     users,
@@ -49,6 +49,7 @@ export const useUsers = () => {
     getUserById,
     addUser,
     updateUser,
+    deleteUser,
   };
 };
 
@@ -66,7 +67,6 @@ async function fetchUsers() {
   }
 
   if (!response.users) {
-    error.value = true;
     return;
   }
 
@@ -84,6 +84,9 @@ function updateUser(user: User) {
     return { ok: false, message: 'Este correo ya esta registrado' };
   }
   const index = _users.value.findIndex((u) => u.id === user.id);
+  if (index === -1) {
+    return { ok: false, message: 'Usuario no encontrado' };
+  }
   _users.value[index] = user;
   return { ok: true, message: 'Usuario actualizado con éxito' };
 }
@@ -100,4 +103,14 @@ function addUser(name: string, email: string, company: string) {
   };
   _users.value.push(newUser);
   return { ok: true, message: 'Usuario registrado con éxito' };
+}
+
+function deleteUser(id: number) {
+  const index = _users.value.findIndex((u) => u.id === id);
+  if (index === -1) {
+    return { ok: false, message: 'Usuario no encontrado' };
+  }
+
+  _users.value.splice(index, 1);
+  return { ok: true, message: 'Usuario eliminado con éxito' };
 }

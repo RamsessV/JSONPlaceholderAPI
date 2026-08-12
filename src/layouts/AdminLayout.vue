@@ -11,16 +11,14 @@
         <span></span>
       </div>
 
-      <p class="sidebar__text">
-        Gestiona la información de tu aplicación desde un solo lugar.
-      </p>
+      <p class="sidebar__text">Gestiona la información de tu aplicación desde un solo lugar.</p>
     </aside>
 
     <div class="content">
       <header class="header">
         <h1>Dashboard</h1>
 
-        <button>Cerrar sesión</button>
+        <MainButton class="red" title="Cerrar sesión" type="button" @on-click="handleLogOut" />
       </header>
 
       <main class="main">
@@ -29,6 +27,19 @@
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { logoutAction } from '@/actions/logout.action';
+import MainButton from '@/components/MainButton.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const handleLogOut = () => {
+  logoutAction();
+  router.replace('/auth');
+};
+</script>
 
 <style scoped>
 .dashboard {
@@ -50,7 +61,6 @@
   gap: 0.75rem;
   font-weight: bold;
 }
-
 
 .sidebar__decoration {
   display: flex;
