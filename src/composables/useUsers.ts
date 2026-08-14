@@ -62,11 +62,13 @@ async function fetchUsers() {
   const response = await getUsersAction();
 
   if (!response.ok) {
+    loading.value = false;
     error.value = true;
     return;
   }
 
   if (!response.users) {
+    loading.value = false;
     return;
   }
 
@@ -76,7 +78,7 @@ async function fetchUsers() {
 }
 
 function getUserById(id: number) {
-  return users.value.find((user) => user.id === id);
+  return _users.value.find((user) => user.id === id);
 }
 
 function updateUser(user: User) {
