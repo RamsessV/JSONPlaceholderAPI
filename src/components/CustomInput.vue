@@ -13,12 +13,10 @@
 <script setup lang="ts">
 interface Props {
   modelValue?: string | number;
-  type: 'text' | 'number';
+  type: 'text' | 'number' | 'password';
 }
 
-withDefaults(defineProps<Props>(), {
-  type: 'text',
-});
+defineProps<Props>();
 
 defineEmits<{
   'update:modelValue': [value: string];

@@ -9,7 +9,7 @@
 
     <div class="login__field">
       <label for="password">Contraseña</label>
-      <CustomInput v-model="user.password" type="text" />
+      <CustomInput v-model="user.password" type="password" />
     </div>
 
     <MainButton title="Ingresar" type="submit" />
